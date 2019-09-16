@@ -200,6 +200,7 @@ set foldenable              " 开始折叠
 set nocompatible
 " 语法高亮
 set syntax=on
+syntax on
 " 去掉输入错误的提示声音
 set noeb
 " 在处理未保存或只读文件的时候，弹出确认
