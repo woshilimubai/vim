@@ -1,10 +1,10 @@
 set nocompatible
 filetype on
- 
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
- 
- 
+
+
 " 这里根据自己需要的插件来设置，以下是我的配置 "
 "
 " YouCompleteMe:语句补全插件
@@ -27,16 +27,16 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"             " 回车即�
 nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项
 "
- 
- 
- 
+
+
+
 " github 仓库中的插件 "
 Plugin 'VundleVim/Vundle.vim'
- 
- 
+
+
 Plugin 'vim-airline/vim-airline'
 "vim-airline配置:优化vim界面"
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 " airline设置
 " 显示颜色
 set t_Co=256
@@ -64,9 +64,9 @@ map <leader>6 :b 6<CR>
 map <leader>7 :b 7<CR>
 map <leader>8 :b 8<CR>
 map <leader>9 :b 9<CR>
- 
- 
- 
+
+
+
 " vim-scripts 中的插件 "
 Plugin 'taglist.vim'
 "ctags 配置:F3快捷键显示程序中的各种tags，包括变量和函数等。
@@ -75,37 +75,62 @@ let Tlist_Use_Right_Window=1
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_WinWidt=25
- 
+
 Plugin 'The-NERD-tree'
 "NERDTree 配置:F2快捷键显示当前目录树
 map <F2> :NERDTreeToggle<CR>
-let NERDTreeWinSize=25 
- 
+let NERDTreeWinSize=35 
+let NERDChristmasTree=1
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+let NERDTreeShowBookmarks=1
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+let g:nerdtree_tabs_open_on_console_startup=1
 Plugin 'indentLine.vim'
 Plugin 'delimitMate.vim'
- 
+
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+""Plugin 'tpope/vim-fugitve'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+
 " 非 github 仓库的插件"
 " Plugin 'git://git.wincent.com/command-t.git'
 " 本地仓库的插件 "
- 
+
 call vundle#end()
- 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.py文件，自动插入到文件头
 autocmd BufNewFile *.py exec ":call SetTitlePy()"
 func SetTitlePy()
-    call setline(1, "##########################################################################")
-    call append(line("."), "# File Name: ".expand("%")) 
-    call append(line(".")+1, "# Author: JobYan") 
+	call setline(1, "##########################################################################")
+	call append(line("."), "# File Name: ".expand("%")) 
+	call append(line(".")+1, "# Author: JobYan") 
 	call append(line(".")+2, "# mail: 15732137039@163.com") 
 	call append(line(".")+3, "# Created Time: ".strftime("%c")) 
 	call append(line(".")+4, "#########################################################################") 
 	call append(line(".")+5, "")
-	call append(line(".")+6, "#!/bin/env/python3")
+	call append(line(".")+6, "#!/usr/bin/python3")
 	call append(line(".")+7, "# -*- coding: utf-8 -*-")
-"新建文件后，自动定位到文件末尾
+	"新建文件后，自动定位到文件末尾
 	call append(line(".")+8, "")
 	autocmd BufNewFile * normal G
 endfunc
@@ -118,7 +143,7 @@ func SetTitle()
 		call setline(1, "##########################################################################") 
 		call append(line("."), "# File Name: ".expand("%")) 
 		call append(line(".")+1, "# Author: JobYan") 
-		call append(line(".")+2, "# mail: 15732137039@163.com") 
+		call append(line(".")+2, "# Mail: jobyan@foxmail.com") 
 		call append(line(".")+3, "# Created Time: ".strftime("%c")) 
 		call append(line(".")+4, "#########################################################################") 
 		call append(line(".")+5, "#!/bin/zsh")
@@ -129,14 +154,15 @@ func SetTitle()
 		call setline(1, "/*************************************************************************") 
 		call append(line("."), "	> File Name: ".expand("%")) 
 		call append(line(".")+1, "	> Author: JobYan") 
-		call append(line(".")+2, "	> Mail: 15732137039@163.com ") 
+		"call append(line(".")+2, "	> Mail: 15732137039@163.com ") 
+		call append(line(".")+2, "  > Mail: jobyan@foxmail.com") 
 		call append(line(".")+3, "	> Created Time: ".strftime("%c")) 
 		call append(line(".")+4, " ************************************************************************/") 
 		call append(line(".")+5, "")
 	endif
 	if &filetype == 'cpp'
 		call append(line(".")+6, "#include<iostream>")
-    	call append(line(".")+7, "using namespace std;")
+		call append(line(".")+7, "using namespace std;")
 		call append(line(".")+8, "")
 	endif
 	if &filetype == 'c'
@@ -153,19 +179,26 @@ endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "键盘命令
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
- 
+
 nmap <leader>w :w!<cr>
 nmap <leader>f :find<cr>
- 
+
 " 映射全选+复制 ctrl+a
 map <C-A> ggVGY
 map! <C-A> <Esc>ggVGY
 map <F12> gg=G
 " 选中状态下 Ctrl+c 复制
 vmap <C-c> "+y
- 
- 
- 
+" 切换被分割的vim窗口
+"map <c-j> <c-w>j "move up Ctrl+j             
+"map <c-k> <c-w>k "down    Ctrl+k             
+"map <c-l> <c-w>l "right   Ctrl+l              
+"map <c-h> <c-w>h "left    Ctrl+h
+nnoremap <C-j> <C-W><C-J> " Ctrl + J: 切换到下方的分割窗口
+nnoremap <C-k> <C-W><C-K> " Ctrl + K: 切换到上方的分割窗口
+nnoremap <C-l> <C-W><C-L> " Ctrl + L: 切换到左侧的分割窗口
+nnoremap <C-h> <C-W><C-H> " Ctrl + H: 切换到右侧的分割窗口
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""实用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -178,7 +211,7 @@ set completeopt=preview,menu
 "允许插件  
 filetype plugin on
 "共享剪贴板  
-set clipboard=unnamed 
+set clipboard=unnamed,unnamedplus 
 "从不备份  
 set nobackup
 "make 运行
@@ -194,7 +227,7 @@ set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:
 " 设置在状态行显示的信息
 set foldcolumn=0
 set foldmethod=indent 
-set foldlevel=3 
+set foldlevel=99 
 set foldenable              " 开始折叠
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
@@ -279,7 +312,7 @@ set scrolloff=3
 " 为C程序提供自动缩进
 set smartindent
 " 高亮显示普通txt文件（需要txt.vim脚本）
- au BufRead,BufNewFile *  setfiletype txt
+au BufRead,BufNewFile *  setfiletype txt
 "自动补全
 :inoremap ( ()<ESC>i
 :inoremap ) <c-r>=ClosePair(')')<CR>
@@ -307,27 +340,30 @@ Plugin 'kien/ctrlp.vim'
 """"""""""""""""""""""
 map <F5> :call CompileRunGcc()<CR>
 func CompileRunGcc()
-    exec "w"
-    if &filetype == 'c'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!time java %<"
-    elseif &filetype == 'sh'
-        :!time bash %
-    elseif &filetype == 'python'
-        exec "!time python3.6 %"
-    elseif &filetype == 'html'
-        exec "!firefox % &"
-    elseif &filetype == 'go'
-        exec "!go build %<"
-        exec "!time go run %"
-    elseif &filetype == 'mkd'
-        exec "!~/.vim/markdown.pl % > %.html &"
-        exec "!firefox %.html &"
-    endif
+	exec "w"
+	if &filetype == 'c'
+		exec "!g++ % -o %<"
+		exec "!time ./%<"
+	elseif &filetype == 'cpp'
+		exec "!g++ % -o %<"
+		exec "!time ./%<"
+	elseif &filetype == 'java'
+		exec "!javac %"
+		exec "!time java %<"
+	elseif &filetype == 'sh'
+		:!time bash %
+	elseif &filetype == 'python'
+		exec "!time python3 %"
+	elseif &filetype == 'html'
+		exec "!firefox % &"
+	elseif &filetype == 'go'
+		exec "!go build %<"
+		exec "!time go run %"
+	elseif &filetype == 'mkd'
+		exec "!~/.vim/markdown.pl % > %.html &"
+		exec "!firefox %.html &"
+	endif
 endfunc
+
+syntax on
+colorscheme desert
