@@ -24,7 +24,7 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_show_diagnostics_ui = 0                           " 禁用语法检查
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"             " 回车即选中当前项
-nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
+" nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>     " 跳转到定义处
 let g:ycm_min_num_of_chars_for_completion=2                 " 从第2个键入字符就开始罗列匹配项
 "
 
@@ -98,7 +98,8 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
-let g:nerdtree_tabs_open_on_console_startup=1
+" 默认自动打开NERDTree
+" let g:nerdtree_tabs_open_on_console_startup=1
 Plugin 'indentLine.vim'
 Plugin 'delimitMate.vim'
 
@@ -320,8 +321,8 @@ au BufRead,BufNewFile *  setfiletype txt
 ":inoremap } <c-r>=ClosePair('}')<CR>
 :inoremap [ []<ESC>i
 :inoremap ] <c-r>=ClosePair(']')<CR>
-:inoremap " ""<ESC>i
-:inoremap ' ''<ESC>i
+" :inoremap " ""<ESC>i
+" :inoremap ' ''<ESC>i
 function! ClosePair(char)
 	if getline('.')[col('.') - 1] == a:char
 		return "\<Right>"
@@ -367,3 +368,6 @@ endfunc
 
 syntax on
 colorscheme desert
+
+map <C-j> :tabp<CR>
+map <C-k> :tabn<CR>
