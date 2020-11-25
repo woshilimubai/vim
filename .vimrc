@@ -76,7 +76,8 @@ let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_WinWidt=25
 
-Plugin 'The-NERD-tree'
+" Plugin 'The-NERD-tree' # 该插件在Ubuntu18.04使用时，出现错误，所以修改为下面的'preservim/nerdtree'
+Plugin 'preservim/nerdtree'
 "NERDTree 配置:F2快捷键显示当前目录树
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeWinSize=35 
@@ -86,7 +87,8 @@ let NERDTreeAutoCenter=1
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.pyc','\~$','\.swp']
 let NERDTreeShowBookmarks=1
-let g:NERDTreeIndicatorMapCustom = {
+" let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
